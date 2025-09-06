@@ -1,6 +1,6 @@
 # Tiny Tapeout project information
 project:
-  title:        "proyecto_01.v"      # Project title
+  title:        "project.v"      # Project title
   author:       "Marcelo"      # Your name
   discord:      "Hola"      # Your discord username, for communication and automatically assigning you a Tapeout role (optional)
   description:  "Club Penguin"      # One line description of what your project does
