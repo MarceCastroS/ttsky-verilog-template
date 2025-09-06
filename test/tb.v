@@ -1,49 +1,84 @@
-`default_nettype none
+// Testbench automatically generated online
+// at https://vhdl.lapinoo.net
+// Generation date : Sat, 06 Sep 2025 05:10:59 GMT
+// Request id : cfwk-fed377c2-68bbc2633af97
+
 `timescale 1ns / 1ps
 
-/* This testbench just instantiates the module and makes some convenient wires
-   that can be driven / tested by the cocotb test.py.
-*/
-module tb ();
+module tb_Cardjitsu;
 
-  // Dump the signals to a VCD file. You can view it with gtkwave or surfer.
-  initial begin
-    $dumpfile("tb.vcd");
-    $dumpvars(0, tb);
-    #1;
-  end
+    // Component declaration for Cardjitsu
+    reg clk;
+    reg rst;
+    reg btn_0;
+    reg btn_1;
+    reg btn_2;
+    reg [3:0] sw;
+    wire [3:0] leds;
+    wire led6_r;
+    wire led6_g;
+    wire led6_b;
 
-  // Wire up the inputs and outputs:
-  reg clk;
-  reg rst_n;
-  reg ena;
-  reg [7:0] ui_in;
-  reg [7:0] uio_in;
-  wire [7:0] uo_out;
-  wire [7:0] uio_out;
-  wire [7:0] uio_oe;
-`ifdef GL_TEST
-  wire VPWR = 1'b1;
-  wire VGND = 1'b0;
-`endif
+    Cardjitsu dut (
+        .clk(clk),
+        .rst(rst),
+        .btn_0(btn_0),
+        .btn_1(btn_1),
+        .btn_2(btn_2),
+        .sw(sw),
+        .leds(leds),
+        .led6_r(led6_r),
+        .led6_g(led6_g),
+        .led6_b(led6_b)
+    );
 
-  // Replace tt_um_example with your module name:
-  tt_um_cardjitsu user_project (
+    parameter TbPeriod = 1000; // ***EDIT*** Put right period here
+    reg TbClock = 0;
+    reg TbSimEnded = 0;
 
-      // Include power ports for the Gate Level test:
-`ifdef GL_TEST
-      .VPWR(VPWR),
-      .VGND(VGND),
-`endif
+    initial begin
+        // Clock generation
+        forever begin
+            #(TbPeriod / 2) TbClock = ~TbClock;
+            if (TbSimEnded) begin
+                TbClock = 0;
+            end
+        end
+    end
 
-      .ui_in  (ui_in),    // Dedicated inputs
-      .uo_out (uo_out),   // Dedicated outputs
-      .uio_in (uio_in),   // IOs: Input path
-      .uio_out(uio_out),  // IOs: Output path
-      .uio_oe (uio_oe),   // IOs: Enable path (active high: 0=input, 1=output)
-      .ena    (ena),      // enable - goes high when design is selected
-      .clk    (clk),      // clock
-      .rst_n  (rst_n)     // not reset
-  );
+    // ***EDIT*** Check that clk is really your main clock signal
+    always @(posedge TbClock) begin
+        clk = TbClock;
+    end
 
+    initial begin
+        // ***EDIT*** Adapt initialization as needed
+        btn_0 = 0;
+        btn_1 = 0;
+        btn_2 = 0;
+        sw = 4'b0000;
+
+        // Reset generation
+        // ***EDIT*** Check that rst is really your reset signal
+        rst = 1;
+        #100;
+        rst = 0;
+        #100;
+
+        // ***EDIT*** Add stimuli here
+        #(100 * TbPeriod);
+
+        // Stop the clock and hence terminate the simulation
+        TbSimEnded = 1;
+        #1;
+        $finish;
+    end
+
+endmodule
+
+// Configuration block below is required by some simulators. Usually no need to edit.
+
+`timescale 1ns / 1ps
+module cfg_tb_Cardjitsu;
+    // Configuration for tb_Cardjitsu
 endmodule
