@@ -62,7 +62,7 @@ module tb ();
   assign uio_oe  = 8'h00;
 
   // Replace tt_um_example with your module name:
-  Cardjitsu user_project (
+  tt_um_cardjitsu user_project (
 `ifdef GL_TEST
     // Cardjitsu has no power pins; ensure GL_TEST isn't required for this DUT.
     // (Do NOT pass .VPWR/.VGND here.)
